@@ -112,7 +112,7 @@ void tokenize(std::string const &str, const char delim, std::vector<std::string>
 class GStreamer {
 public:
     GStreamer(switch_core_session_t *session, const char* lang, char* projectId, char* event, char* text) :
-            m_lang(lang), m_sessionId(switch_core_session_get_uuid(session)), m_environment("draft"), m_regionId("us"),
+            m_lang(lang), m_sessionId(switch_core_session_get_uuid(session)), m_environment("draft"), m_regionId("global"),
             m_speakingRate(), m_pitch(), m_volume(), m_voiceName(""), m_voiceGender(""), m_effects(""),
             m_sentimentAnalysis(false), m_finished(false), m_packets(0) {
 		const char* var;
@@ -137,7 +137,7 @@ public:
 		}
 
 		std::string endpoint = "dialogflow.googleapis.com";
-		if (0 != m_regionId.compare("us")) {
+		if (0 != m_regionId.compare("global")) {
 			endpoint = m_regionId;
 			endpoint.append("-dialogflow.googleapis.com:443");
 		}
